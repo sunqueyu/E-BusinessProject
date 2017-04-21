@@ -2,7 +2,6 @@ package com.example.administrator.e_businessproject.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,29 +9,28 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bartoszlipinski.recyclerviewheader.RecyclerViewHeader;
 import com.bumptech.glide.Glide;
 import com.example.administrator.e_businessproject.R;
+import com.example.administrator.e_businessproject.activity.AllActivity;
 import com.example.administrator.e_businessproject.activity.DetailActivity;
+import com.example.administrator.e_businessproject.activity.GoodsActivity;
 import com.example.administrator.e_businessproject.adapter.DefaultAdapter;
 import com.example.administrator.e_businessproject.adapter.HotAdapter;
-import com.example.administrator.e_businessproject.adapter.HotRecAdapter;
 import com.example.administrator.e_businessproject.adapter.RecAdapter;
 import com.example.administrator.e_businessproject.bean.HomeBean;
 import com.example.administrator.e_businessproject.view.FullyLinearLayoutManager;
 import com.example.administrator.e_businessproject.view.InnerGridView;
 import com.example.administrator.e_businessproject.view.InnerListView;
-import com.example.administrator.e_businessproject.view.RecyclerViewDivider;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -45,6 +43,7 @@ import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,9 +108,22 @@ public class Frag_home extends Fragment{
                         }
                     }
 
+                    //春季热销适配器
                     RecAdapter adapter = new RecAdapter(getActivity(),list_good);
                     recycler_spring.setLayoutManager(new FullyLinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
                     recycler_spring.setAdapter(adapter);
+
+                    //春季热销点击条目跳转到商品页
+                    adapter.setOnItemClickListener(new RecAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            Intent intent=new Intent(getActivity(), GoodsActivity.class);
+                            intent.putExtra("sp",position);
+                            intent.putExtra("spring", (Serializable) list_good);
+                            startActivity(intent);
+                        }
+                    });
+
 
                     //优惠活动的集合
                     List<HomeBean.DataBean.ActivityInfoBean.ActivityInfoListBean> activityInfoList = data.getActivityInfo().getActivityInfoList();
@@ -137,21 +149,20 @@ public class Frag_home extends Fragment{
 
                         @Override
                         public void destroyItem(ViewGroup container, int position, Object object) {
-                            ImageView imageView = vp_im.get(position%vp_im.size());
-                            container.removeView(imageView);
+                           /* ImageView imageView = vp_im.get(position%vp_im.size());
+                            container.removeView(imageView);*/
                         }
 
                         @Override
                         public Object instantiateItem(ViewGroup container, int position) {
-                            ImageView imageView = vp_im.get(position%vp_im.size());
-                            container.addView(imageView);
-                            /*banner_yh.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
+                            // 保险起见，防止图片只有两三张的时候出现问题,所以使用了try{}catch(){}
+                            try {
+                                container.addView(vp_im.get(position % vp_im.size()), 0);
+                            } catch (Exception e) {
+                                // handler something
+                            }
 
-                                }
-                            });*/
-                            return imageView;
+                            return vp_im.get(position % vp_im.size());
                         }
                     });
 
@@ -161,9 +172,21 @@ public class Frag_home extends Fragment{
                     lv_hot.setAdapter(new HotAdapter(getActivity(),subjects));
 
                     //默认
-                    List<HomeBean.DataBean.DefaultGoodsListBean> defaultGoodsList = data.getDefaultGoodsList();
-                    gv_default.setAdapter(new DefaultAdapter(getActivity(),defaultGoodsList));
-
+                    defaultGoodsList = data.getDefaultGoodsList();
+                    List<HomeBean.DataBean.DefaultGoodsListBean> list_d = new ArrayList<>();
+                    for(int i=0;i<6;i++){
+                        list_d.add(defaultGoodsList.get(i));
+                    }
+                    gv_default.setAdapter(new DefaultAdapter(getActivity(), list_d));
+                    gv_default.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(getActivity(),GoodsActivity.class);
+                            intent.putExtra("dp",position);
+                            intent.putExtra("default", (Serializable) defaultGoodsList);
+                            startActivity(intent);
+                        }
+                    });
                     break;
             }
         }
@@ -171,6 +194,7 @@ public class Frag_home extends Fragment{
     private ViewPager banner_yh;
     private InnerListView lv_hot;
     private InnerGridView gv_default;
+    private List<HomeBean.DataBean.DefaultGoodsListBean> defaultGoodsList;
 
 
     @Nullable
@@ -187,6 +211,7 @@ public class Frag_home extends Fragment{
         initView();
 
         getData();
+
     }
 
     private void initView() {
@@ -217,6 +242,7 @@ public class Frag_home extends Fragment{
         //mHeader.attachTo(recycler_spring, true);
 
         banner_yh = (ViewPager) view.findViewById(R.id.banner_yh);
+        //banner_yh.setOffscreenPageLimit(3);
 
         //热门专题
         lv_hot = (InnerListView) view.findViewById(R.id.list_hot);
@@ -230,6 +256,17 @@ public class Frag_home extends Fragment{
                   Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("position",position);
                 intent.putExtra("url",ad1.get(position).getAd_type_dynamic_data());
+                startActivity(intent);
+            }
+        });
+
+        //查看所有商品
+        TextView tv_showAll = (TextView) view.findViewById(R.id.tv_showAll);
+        tv_showAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转到全部商品的activity
+                Intent intent= new Intent(getActivity(), AllActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.administrator.e_businessproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.e_businessproject.R;
+import com.example.administrator.e_businessproject.activity.GoodsActivity;
 import com.example.administrator.e_businessproject.bean.HomeBean;
 import com.example.administrator.e_businessproject.view.FullyLinearLayoutManager;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -24,6 +27,7 @@ public class HotAdapter extends BaseAdapter{
 
     private Context context;
     private List<HomeBean.DataBean.SubjectsBean> list;
+
     public HotAdapter(Context context, List<HomeBean.DataBean.SubjectsBean> list) {
         this.context=context;
         this.list=list;
@@ -57,11 +61,21 @@ public class HotAdapter extends BaseAdapter{
             holder= (ViewHolder) convertView.getTag();
         }
         Glide.with(context).load(list.get(position).getImage()).into(holder.im_hot );
-        List<HomeBean.DataBean.SubjectsBean.GoodsListBean> goodsList = list.get(position).getGoodsList();
+        final List<HomeBean.DataBean.SubjectsBean.GoodsListBean> goodsList = list.get(position).getGoodsList();
         HotRecAdapter adapter = new HotRecAdapter(context,goodsList);
         FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(context,RecyclerView.HORIZONTAL,false);
         holder.rcv_hot.setLayoutManager(linearLayoutManager);
         holder.rcv_hot.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new HotRecAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(context, GoodsActivity.class);
+                intent.putExtra("hp",position);
+                intent.putExtra("hot", (Serializable) goodsList);
+                context.startActivity(intent);
+            }
+        });
 
         return convertView;
     }

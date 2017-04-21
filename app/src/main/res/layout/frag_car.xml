@@ -2,10 +2,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="购物车"
+        android:textSize="20dp"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/f3_xiang"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="car"/>
+        android:orientation="vertical"
+        >
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/f3_listview"></ListView>
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/f3_box"
+                    />
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全选"
+                    android:textSize="20sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_marginLeft="50dp"
+                    android:textColor="#ff00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总计 ：￥"
+                    android:textSize="20sp"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/f3_price"
+                        android:textColor="#ff00"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1725.5"
+                        android:textSize="20sp"
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/f3_jiesuan"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:background="#ff0099"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="结算"
+                    android:textSize="18sp"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/f3_lin2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#282727"></View>
+        <ImageView
+            android:src="@mipmap/shopping_trolley_empty"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="购物车是空的喲~~~，快去逛逛哈"
+            android:textSize="18dp"
+            />
+        <Button
+            android:background="@drawable/log_shop"
+            android:id="@+id/bu_g"
+            android:layout_width="wrap_content"
+            android:text="逛一逛"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
 
 </LinearLayout>

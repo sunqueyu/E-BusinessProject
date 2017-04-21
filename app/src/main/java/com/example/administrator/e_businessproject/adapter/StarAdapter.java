@@ -2,7 +2,6 @@ package com.example.administrator.e_businessproject.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,26 +10,25 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.administrator.e_businessproject.R;
-import com.example.administrator.e_businessproject.bean.HomeBean;
+import com.example.administrator.e_businessproject.bean.ClassifyBean;
 
 import java.util.List;
 
 /**
- * 类的用途：首页默认
+ * 类的用途：明星产品适配器
  * Created by ${孙鹊禹}
- * on 2017/4/14 19:48
+ * on 2017/4/16 20:34
  */
 
-public class DefaultAdapter extends BaseAdapter{
+public class StarAdapter extends BaseAdapter{
 
     private Context context;
-    private List<HomeBean.DataBean.DefaultGoodsListBean> list;
+    private List<ClassifyBean.DataBean.GoodsBriefBean> list;
 
-    public DefaultAdapter(Context context, List<HomeBean.DataBean.DefaultGoodsListBean> list){
+    public StarAdapter(Context context, List<ClassifyBean.DataBean.GoodsBriefBean> list){
         this.context=context;
         this.list=list;
     }
-
     @Override
     public int getCount() {
         return list.size();
@@ -50,7 +48,7 @@ public class DefaultAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView==null){
-            convertView=View.inflate(context,R.layout.recycler_item,null);
+            convertView=View.inflate(context, R.layout.recycler_item,null);
             holder=new ViewHolder();
             holder.goods_pic = (ImageView) convertView.findViewById(R.id.goods_pic);
             holder.goods_name = (TextView) convertView.findViewById(R.id.goods_name);

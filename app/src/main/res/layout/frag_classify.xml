@@ -33,7 +33,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/btn_mask"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -54,7 +54,7 @@
                         android:padding="10dp">
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/btn_water"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -62,6 +62,7 @@
                             android:src="@mipmap/classify_emollient_water" />
 
                         <ImageView
+                            android:id="@+id/btn_lotion"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -76,6 +77,7 @@
                         android:padding="10dp">
 
                         <ImageView
+                            android:id="@+id/btn_cleanser"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -83,6 +85,7 @@
                             android:src="@mipmap/classify_facial_cleanser" />
 
                         <ImageView
+                            android:id="@+id/btn_other"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -91,7 +94,7 @@
                     </LinearLayout>
 
                     <ImageView
-
+                        android:id="@+id/btn_kit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
@@ -112,6 +115,7 @@
                     android:text="--按功效--" />
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:gravity="center"
@@ -123,30 +127,35 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/btn_hydrating"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:src="@mipmap/classify_hydrating" />
 
                     <ImageView
+                        android:id="@+id/btn_soothing"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:src="@mipmap/classify_soothing" />
 
                     <ImageView
+                        android:id="@+id/btn_oil"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:src="@mipmap/classify_control_oil" />
 
                     <ImageView
+                        android:id="@+id/btn_whitening"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:src="@mipmap/classify_whitening" />
 
                     <ImageView
+                        android:id="@+id/btn_firming"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -178,69 +187,73 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <Button
                             android:id="@+id/cat1"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
                             android:background="#DEDEB9"
                             android:text="fdf" />
 
                         <Button
                             android:id="@+id/cat2"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:background="#EED4C2"
                             android:text="fdf" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <Button
                             android:id="@+id/cat3"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
                             android:background="#D4D7F7"
                             android:text="fdf" />
 
                         <Button
                             android:id="@+id/cat4"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:background="#D1E1C3"
                             android:text="fdf" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <Button
                             android:id="@+id/cat5"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
                             android:layout_weight="1"
                             android:background="#F1D2CB"
                             android:text="fdf" />
 
                         <Button
                             android:id="@+id/cat6"
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:background="#BFF1EC"
                             android:text="fdf" />
@@ -253,16 +266,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="--明星产品--"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
+
                 <com.example.administrator.e_businessproject.view.InnerGridView
+                    android:id="@+id/gv_star"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gv_star"></com.example.administrator.e_businessproject.view.InnerGridView>
+                    android:horizontalSpacing="15dp"
+                    android:numColumns="2"></com.example.administrator.e_businessproject.view.InnerGridView>
 
             </LinearLayout>
         </LinearLayout>
