@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="商品详情"/>
       <ImageView
+          android:id="@+id/imm_car"
           android:padding="10dp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -226,7 +227,7 @@
                 android:text="客服"/>
         </LinearLayout>
         <TextView
-            android:id="@+id/shang_mai"
+            android:id="@+id/shop_buy"
             android:background="#c9c963"
             android:layout_marginTop="10dp"
          android:padding="10dp"
@@ -235,7 +236,7 @@
             android:layout_height="wrap_content"
             android:text="立即购买"/>
         <TextView
-            android:id="@+id/shang_jia"
+            android:id="@+id/shop_car"
             android:background="#ff006f"
             android:layout_marginTop="10dp"
             android:padding="10dp"

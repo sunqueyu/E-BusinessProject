@@ -8,11 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.administrator.e_businessproject.R;
 import com.example.administrator.e_businessproject.activity.ClassifyActivity;
+import com.example.administrator.e_businessproject.activity.GoodsActivity;
 import com.example.administrator.e_businessproject.activity.ImagesActivity;
 import com.example.administrator.e_businessproject.adapter.StarAdapter;
 import com.example.administrator.e_businessproject.bean.ClassifyBean;
@@ -20,12 +22,13 @@ import com.example.administrator.e_businessproject.view.InnerGridView;
 import com.example.administrator.e_businessproject.view.OkHttpClientManager;
 import com.squareup.okhttp.Request;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * 类的用途：
+ * 类的用途：分类页
  * Created by ${孙鹊禹}
  * on 2017/4/13 20:38
  */
@@ -36,6 +39,7 @@ public class Frag_classify extends Fragment {
     private View view;
     private InnerGridView gv_star;
     private ArrayList<Button> btn;
+    private List<ClassifyBean.DataBean.GoodsBriefBean> goodsBrief;
 
     @Nullable
     @Override
@@ -49,6 +53,16 @@ public class Frag_classify extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         initView();
+
+        gv_star.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), GoodsActivity.class);
+                intent.putExtra("gp",position);
+                intent.putExtra("goodsBrief", (Serializable) goodsBrief);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {
@@ -165,8 +179,9 @@ public class Frag_classify extends Fragment {
                     btn.get(i).setText("#" + children.get(i).getCat_name() + "#");
                 }
                 //goodsBrief集合
-                List<ClassifyBean.DataBean.GoodsBriefBean> goodsBrief = response.getData().getGoodsBrief();
+                goodsBrief = response.getData().getGoodsBrief();
                 gv_star.setAdapter(new StarAdapter(getActivity(), goodsBrief));
+
             }
         });
     }

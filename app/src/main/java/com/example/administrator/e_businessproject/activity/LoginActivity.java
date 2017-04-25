@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity{
     private String pwds;
     private EditText log_name;
     private EditText log_pwd;
+    public static int userID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity{
                 //Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                 Gson gson=new Gson();
                 InfoBean bean = gson.fromJson(result, InfoBean.class);
-                int userID = bean.userID;
+                userID = bean.userID;
                 if(bean.str.equals("success")){
                     state=true;
                     Intent intent = new Intent();
